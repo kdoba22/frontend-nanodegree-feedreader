@@ -15,7 +15,6 @@ The following tests were written and run:
 	5. Write a test that ensures the menu changes visibility when the menu icon is clicked. This test should have two expectations: does the menu display when clicked and does it hide when clicked again.
 
 	6. Write a test that ensures when the loadFeed function is called and completes its work, there is at least a single .entry element within the .feed container. Remember, loadFeed() is asynchronous so      
-
 	   this test wil require the use of Jasmine's beforeEach and asynchronous done() function.
 	   
 	7. Write a test that ensures when a new feed is loaded by the loadFeed function that the content actually changes. Remember, loadFeed() is asynchronous.
@@ -23,6 +22,7 @@ The following tests were written and run:
 Al Tests passed.
 
 For this project I used:
+
 Udacity JavaScripit Testing course, https://www.udacity.com/course/viewer#!/c-ud549-nd/l-3773158892/m-3845708657
 http://www.w3schools.com/
 http://jasmine.github.io/2.2/introduction.html
