@@ -24,5 +24,7 @@ Al Tests passed.
 For this project I used:
 
 Udacity JavaScripit Testing course, https://www.udacity.com/course/viewer#!/c-ud549-nd/l-3773158892/m-3845708657
+
 http://www.w3schools.com/
+
 http://jasmine.github.io/2.2/introduction.html
