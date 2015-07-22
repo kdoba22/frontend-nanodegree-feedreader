@@ -27,7 +27,7 @@ $(function() {
         });
 
 
-        /* TODO: Write a test that loops through each feed
+        /* This test loops through each feed
          * in the allFeeds object and ensures it has a URL defined
          * and that the URL is not empty.
          */
@@ -45,7 +45,7 @@ $(function() {
             });
          });  
 
-         //  TODO: Write a test that loops through each feed
+         //  This test that loops through each feed
          // * in the allFeeds object and ensures it has a name defined
          // * and that the name is not empty.         
 
@@ -64,19 +64,18 @@ $(function() {
          });       
     }); 
     
-    /* TODO: Write a new test suite named "The menu" */
+    /* New test suite named "The menu" */
     describe('The menu', function() {
-        /* TODO: Write a test that ensures the menu element is
-         * hidden by default. You'll have to analyze the HTML and
-         * the CSS to determine how we're performing the
-         * hiding/showing of the menu element.
+
+        /* This test ensures the menu element is
+         * hidden by default. 
          */        
 
          // define body at this level so that I do not need to defeine it in each of the 'it' blocks
 
          var body = $('body');
 
-        it('menu element is hidden by default', function(){
+        it('Menu element is hidden by default', function(){
             /* associate the variable body with the body tag in the html */
      //       var body = $('body');
 
@@ -86,12 +85,10 @@ $(function() {
             expect(body.hasClass("menu-hidden")).toBe(true);
         });
 
-        /* TODO: Write a test that ensures the menu changes
-          * visibility when the menu icon is clicked. This test
-          * should have two expectations: does the menu display when
-          * clicked and does it hide when clicked again.
+        /* This test that ensures the menu changes 
+          * visibility when the menu icon is clicked. 
           */
-        it('menu changes visibility when the menu icon is clicked', function(){
+        it('Menu changes visibility when the menu icon is clicked', function(){
 
             var menuIcon = $('.menu-icon-link');
 //            var body = $('body');
@@ -106,19 +103,19 @@ $(function() {
         });             
     });        
 
-    /* TODO: Write a new test suite named "Initial Entries" */
+    /* New test suite named "Initial Entries" */
     describe('Initial Entries', function() {
         beforeEach(function(done) {
             loadFeed(0, done);
         });
 
-        /* TODO: Write a test that ensures when the loadFeed
+        /* This test ensures that when the loadFeed
          * function is called and completes its work, there is at least
          * a single .entry element within the .feed container.
          * Remember, loadFeed() is asynchronous so this test wil require
          * the use of Jasmine's beforeEach and asynchronous done() function.
          */
-        it('there is at least one feed', function(done) {
+        it('There is at least one feed', function(done) {
             var entry = $('.feed a').children('.entry');
         /* checking to make sure there is an least one feed */
             expect(entry.length).not.toBe(0);
@@ -127,25 +124,24 @@ $(function() {
 
      });
 
-    /* TODO: Write a new test suite named "New Feed Selection" */
+    /* New test suite named "New Feed Selection" */
     describe('New Feed Selection', function() {
         var entry,
             entryAfterChange;
 
         beforeEach(function(done) {
-            /*  In JavaScript, the "inner" text of an HTML element refers 
-                to the text between any set of HTML tags. */
-
+            
             // saving text of first entry
-
-            entry = $('.entry')[0].innerText;
-            console.log('Doba');
-            // load second entry
-            loadFeed(1, done);
+            //The html() method sets or returns the content (innerHTML) of the selected elements.
+         
+            entry = $('.feed').html();
+            loadFeed(1, function() {
+            done();
+            });
             
         });
 
-        /* TODO: Write a test that ensures when a new feed is loaded
+        /* Test to ensures when a new feed is loaded
          * by the loadFeed function that the content actually changes.
          * Remember, loadFeed() is asynchronous.
          */
@@ -153,7 +149,8 @@ $(function() {
          it('The contents change when a new feed is loaded', function(done){
 
             //saving text of the second entry for comaprison
-            entryAfterChange =  $('.entry')[0].innerText;
+           // entryAfterChange =  $('.entry')[0].innerText;
+          entryAfterChange =  $('.feed').html();
         // compare first entry to second entry
             expect (entry).not.toBe(entryAfterChange);
             done();
@@ -164,5 +161,6 @@ $(function() {
                 loadFeed(0, done);
             });
     });
+
 });
 
