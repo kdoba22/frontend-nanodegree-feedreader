@@ -1,4 +1,4 @@
-To run this application right click on the index.html and select open with Google chrime.
+To run this application right click on the index.html and select open with Google Chrome.
 
 The tests will run automatically after loading the page.
 

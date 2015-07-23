@@ -25,43 +25,42 @@ $(function() {
             expect(allFeeds).toBeDefined();
             expect(allFeeds.length).not.toBe(0);
         });
-
-
         /* This test loops through each feed
          * in the allFeeds object and ensures it has a URL defined
          * and that the URL is not empty.
          */
-         it('allFeeds URLs are defined', function(){
+        it('allFeeds URLs are defined', function(){
             allFeeds.forEach(function(feed){
                 // checking that the URL is defined
                 expect(feed.url).toBeDefined();
             });
-         });
+        });
 
-         it('allFeeds URLs are not empty', function(){
+        it('allFeeds URLs are not empty', function(){
             allFeeds.forEach(function(feed){
                 // checking that the URL is not empty
                 expect(feed.url.length).not.toBe(0);
             });
-         });  
+        });  
 
-         //  This test that loops through each feed
-         // * in the allFeeds object and ensures it has a name defined
-         // * and that the name is not empty.         
+        /* This test that loops through each feed
+         * in the allFeeds object and ensures it has a name defined
+         * and that the name is not empty.         
+        */ 
 
-         it('allFeeds names are defined', function(){
+        it('allFeeds names are defined', function(){
             allFeeds.forEach(function(feed){
                 // checking that the allFeeds name is defined
                 expect(feed.name).toBeDefined();
             });
-         });
+        });
                
         it('allFeeds names are not empty', function(){
             allFeeds.forEach(function(feed){
                 // checking that the allFeeds name is not empty
                 expect(feed.name.length).not.toBe(0);
             });
-         });       
+        });       
     }); 
     
     /* New test suite named "The menu" */
@@ -71,14 +70,11 @@ $(function() {
          * hidden by default. 
          */        
 
-         // define body at this level so that I do not need to defeine it in each of the 'it' blocks
+        // define body at this level so that I do not need to defeine it in each of the 'it' blocks
 
-         var body = $('body');
+        var body = $('body');
 
         it('Menu element is hidden by default', function(){
-            /* associate the variable body with the body tag in the html */
-     //       var body = $('body');
-
             /* The hasClass() method checks if any of the selected elements 
                have a specified class name.  If ANY of the selected elements 
                has the specified class name, this method will return "true". */
@@ -91,13 +87,11 @@ $(function() {
         it('Menu changes visibility when the menu icon is clicked', function(){
 
             var menuIcon = $('.menu-icon-link');
-//            var body = $('body');
             /* Call the click feature of the menuIcon method */
             menuIcon.click();
 
             /* checking to see if the menu shows up after a click */
-            expect(body.hasClass("menu-hidden")).toBe(false);       
-
+            expect(body.hasClass("menu-hidden")).toBe(false);      
             menuIcon.click();
             expect(body.hasClass("menu-hidden")).toBe(true);     
         });             
@@ -116,7 +110,8 @@ $(function() {
          * the use of Jasmine's beforeEach and asynchronous done() function.
          */
         it('There is at least one feed', function(done) {
-            var entry = $('.feed a').children('.entry');
+        //    var entry = $('.feed a').children('.entry');
+            var entry = $('.feed .entry');
         /* checking to make sure there is an least one feed */
             expect(entry.length).not.toBe(0);
             done();
@@ -126,41 +121,28 @@ $(function() {
 
     /* New test suite named "New Feed Selection" */
     describe('New Feed Selection', function() {
-        var entry,
-            entryAfterChange;
+        var entry;
 
         beforeEach(function(done) {
-            
-            // saving text of first entry
-            //The html() method sets or returns the content (innerHTML) of the selected elements.
-         
-            entry = $('.feed').html();
-            loadFeed(1, function() {
-            done();
-            });
-            
-        });
+            loadFeed(1, (function() {
+                entry = $(".feed").html();
+            }));
 
+            done();
+        });
         /* Test to ensures when a new feed is loaded
          * by the loadFeed function that the content actually changes.
          * Remember, loadFeed() is asynchronous.
          */
+        it('content changes when a new feed is loaded', function(done) {
+            loadFeed(2, done);
 
-         it('The contents change when a new feed is loaded', function(done){
-
-            //saving text of the second entry for comaprison
-           // entryAfterChange =  $('.entry')[0].innerText;
-          entryAfterChange =  $('.feed').html();
-        // compare first entry to second entry
-            expect (entry).not.toBe(entryAfterChange);
-            done();
-         });
+            expect($(".feed").html()).not.toEqual(entry);
+        });
 
         // reset back to the first entry in the list 
-            afterEach(function(done) {
-                loadFeed(0, done);
-            });
-    });
-
+        afterEach(function(done) {
+            loadFeed(0, done);
+        });
+    });    
 });
-
